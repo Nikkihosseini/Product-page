@@ -16,6 +16,7 @@
 
 html{
     box-sizing: border-box;
+    font-size: 10px;
 }
 
 *,
@@ -29,8 +30,182 @@ a{
 }
 
 
+.svg{
+    display: none;
+}
+
 body{
     font-family: "Kumbh Sans", sans-serif;
     font-size: 1rem;
+    background-color: var(--White);
 }
 
+
+/* 
+*** component ***
+*/
+
+
+
+/* 
+
+*** App Css ***
+
+*/
+
+.container {
+    width: 100%;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+}
+
+
+/* 
+
+*** Header ***
+
+*/
+
+.header{
+    position: fixed;
+    padding: 0 10rem;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+/* 
+
+!Content Left
+
+*/
+
+.header-wrapper{
+    padding: 3.5rem 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.1rem solid var(--Grayish-blue);
+    justify-content: space-between;
+ }
+
+
+.content-left{
+   display: flex;
+   align-items: center;
+
+}
+.header-logo{
+    width: 14rem;
+    height: 2.5rem;
+}
+.menu{
+    display: flex;
+    align-items: center;
+    margin-left: 5rem;
+    gap: 2.8rem;
+
+}
+.menu-item{
+
+}
+.menu-item__link{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--dark-grayish-blue);
+    transition: all 200ms ease-in 100ms;
+    position: relative;
+}
+
+.menu-item__link:hover{
+    color: var(--dark-blue);
+    font-weight: 600;
+    transition: all 200ms ease-in 100ms;
+}
+
+.menu-item__link::before{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0.3rem;
+    background-color: var(--primary-orange);
+    bottom: -48px;
+}
+
+.menu-item__link:hover:before{
+    width: 100%;
+    transition: all 200ms ease-in 100ms;
+}
+
+/* 
+
+!Content Right
+
+*/
+
+
+.content-right{
+   display: flex;
+   align-items: center;
+}
+.header-cart{
+
+}
+
+.header-cart--svg{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+.cart-box{
+    display: none;
+}
+.cart-box__title{
+
+}
+.cart-box__product{
+
+}
+.product-box__img{
+
+}
+.product-box__content{
+
+}
+.product-box__wrapper{
+
+}
+.product-box__name{
+
+}
+.product-box__prices{
+
+}
+.product-price{
+
+}
+.product-Total-price{
+
+}
+.product-box__delete{
+
+}
+.cart-box__link{
+
+}
+.header-user{
+    width: 4.3rem;
+    height: 4.3rem;
+}
+.header-user__img{
+    width: 100%;
+    height: 100%;
+}
+
+.header-user__img:hover{
+    border: 0.2rem solid var(--primary-orange);
+    border-radius: 100%; 
+}
