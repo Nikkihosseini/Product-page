@@ -151,13 +151,21 @@ body{
 .content-right{
    display: flex;
    align-items: center;
+   gap: 4rem;
 }
 .header-cart{
-
+    width: 2.5rem;
+    height: 2.5rem;
 }
 .header-cart__wrapper{
     margin-right: 4rem;
     position: relative;
+    cursor: pointer;
+}
+
+.header-cart:hover
+.cart-box{
+    opacity: 1;
 }
 
 .header-cart--svg{
@@ -177,47 +185,89 @@ body{
     font-weight: 500;
     line-height: 1.4;
     top: -5px;
-    right: -7px;
+    right: -33px;
 }
 .cart-box{
-    display: none;
+    opacity: 0;
+    background-color: var(--White);
+    box-shadow: 1px 29px 63px -34px rgba(182,188,200,1); 
+    position: absolute;
+    right: 100px;
+    top: 93px;
+    border-radius: 1rem;
+    transition: all 200ms ease-in 100ms;
 }
 .cart-box__title{
+    font-size: 1.4rem;
+    font-weight: 600;
+    border-bottom: 0.1rem solid var(--Grayish-blue);
+    padding: 2rem 2rem 1.5rem 2rem;
 
 }
 .cart-box__product{
-
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 2rem;
 }
 .product-box__img{
-
+    width: 5rem;
+    height: 5rem;
+    border-radius: 0.4rem;
 }
 .product-box__content{
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 .product-box__wrapper{
-
+    color: var(--dark-grayish-blue);
+    margin-left: 1rem;
+    width: 17.3rem;
 }
 .product-box__name{
-
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .product-box__prices{
-
+    font-size: 1.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .product-price{
 
 }
 .product-Total-price{
-
+    color: var(--dark-blue);
+    font-weight: 700;
 }
 .product-box__delete{
-
+    width: 2rem;
+    height: 2rem;
 }
 .cart-box__link{
-
+    background-color: var(--primary-orange);
+    margin: 0 2rem 2rem 2rem;
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    justify-content: center;
+    color: black;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+}
+.cart-box__link:hover{
+    background-color: orange;
 }
 .header-user{
     width: 4.3rem;
     height: 4.3rem;
+    cursor: pointer;
 }
 
 .header-user__img{
