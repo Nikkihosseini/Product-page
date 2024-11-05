@@ -358,13 +358,28 @@ body{
    font-weight: 700;
    font-size: 6rem;
    margin-top: 2rem;
+   max-width: 59.9rem;
+   margin-bottom: 3rem;
+   overflow: hidden;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 2;
+   overflow: hidden;
 }
 
 .product-description{
+    display: -webkit-box;
    color: var(--Grayish-blue);
    font-size: 2rem;
    margin-top: 5rem;
+   max-width: 59.9rem;
+   max-height: 6rem;
    margin-bottom: 3rem;
+   overflow: hidden;
+   display: -webkit-box;
+   -webkit-box-orient: vertical;
+   -webkit-line-clamp: 3;
+   overflow: hidden;
 }
 .product-sale{
     display: flex;
