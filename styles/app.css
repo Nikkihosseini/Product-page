@@ -342,18 +342,21 @@ body{
     overflow: hidden;
     border: 0.3rem solid var(--primary-orange);
     cursor: pointer;
+    background-color: var(--White);
 }
 .product-picture__small{
     width: 100%;
     height: 100%;
+    opacity: 1;
     transition: all 200ms ease-in;
 }
 .product-picture__small:hover{
-    
+    opacity: 0.3;
 }
 .product-picture__small--overlay{
-    background-image: linear-gradient(rgba(255, 255, 255,75%),rgba(255, 255, 255,75%)) ;
+    opacity: 0.3;
 }
+
 .product-text-wrapper{
     flex-basis: 50%;
 }
@@ -600,14 +603,17 @@ body{
     overflow: hidden;
     border: 0.3rem solid var(--primary-orange);
     cursor: pointer;
+    background-color: var(--White);
 }  
 .active-images__small{
     width: 100%;
     height: 100%;
+    opacity: 1;
+    transition: all 200ms ease-in;
 }
 .active-images__small:hover{
-   
-}
+    opacity: 0.3;
+} 
 .active-images__small--overlay{
-   
+    opacity: 0.3;
 }
