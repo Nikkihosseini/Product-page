@@ -10,29 +10,40 @@ let productCount = 0
 
 productPlus.addEventListener('click', () => {
     
-    productCount++
+   if(productCount == 0 ||  productCount > 0 || productCount < 10){
+       productCount++
+   }
 
-
-    if(productCount > 10 ){
-        productCount == 10 
-        productNumberMax.style.display = "block";
-    }else{
-        productNumberMax.style.display = "none";
-        productNumber.innerHTML = productCount
+    if(productCount > 10  || productCount > 9){ 
+        productCount = 10
     }
+
+    if(productCount == 10){
+        productNumberMax.style.display = "block";
+    }
+
+    if(productCount < 10){
+        productNumberMax.style.display = "none";
+    }
+
+    productNumber.innerHTML = productCount
       
       
 })
 
 productMinus.addEventListener('click', () => {
-    productCount--
-    if(productNumberMax.style.display == "block" && productCount == 10){
+
+    if(productCount > 0){
         productCount--
+    }
+
+    if(productCount < 10){
         productNumberMax.style.display = "none";
     }
-    if(productCount < 0 ){
-        productCount == 0
-    } else{
-        productNumber.innerHTML = productCount
-    }
+
+    productNumber.innerHTML = productCount
+   
+    console.log(productCount)
+
 })
+
