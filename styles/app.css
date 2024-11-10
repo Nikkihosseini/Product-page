@@ -353,7 +353,7 @@ body{
 .product-picture__small:hover{
     opacity: 0.3;
 }
-.product-picture__small--overlay{
+.product-picture__small--active{
     opacity: 0.3;
 }
 
