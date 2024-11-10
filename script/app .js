@@ -3,6 +3,10 @@ const productMinus = $.querySelector('.product-minus')
 const productPlus = $.querySelector('.product-plus')
 const productNumber = $.querySelector('.product-number')
 const productNumberMax = $.querySelector('.product-number--max')
+const productPictureSmall = $.querySelectorAll('.product-picture__small')
+const productPictureMain = $.querySelector('.product-picture__main')
+
+
 
 
 
@@ -42,8 +46,14 @@ productMinus.addEventListener('click', () => {
     }
 
     productNumber.innerHTML = productCount
-   
-    console.log(productCount)
 
 })
 
+
+productPictureSmall.forEach(item => {
+    item.addEventListener('click', () => {
+      $.querySelector('.product-picture__small--active').classList.remove('product-picture__small--active')
+      item.classList.add('product-picture__small--active');
+      productPictureMain.src = item.src
+    })
+})
