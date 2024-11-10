@@ -623,6 +623,6 @@ body{
 .active-images__small:hover{
     opacity: 0.3;
 } 
-.active-images__small--overlay{
+.active-images__small--active{
     opacity: 0.3;
 }
