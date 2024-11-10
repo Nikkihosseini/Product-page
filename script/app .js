@@ -5,12 +5,20 @@ const productNumber = $.querySelector('.product-number')
 const productNumberMax = $.querySelector('.product-number--max')
 const productPictureSmall = $.querySelectorAll('.product-picture__small')
 const productPictureMain = $.querySelector('.product-picture__main')
+const activeImages = $.querySelector('.active-images')
+const activeImagesClose = $.querySelector('.active-images--close')
 
 
 
 
 
 let productCount = 0 
+
+function smallGallery(className,productPucture,item){
+    $.querySelector(`.${className}`).classList.remove(className)
+    item.classList.add(className);
+    productPucture.src = item.src
+}
 
 productPlus.addEventListener('click', () => {
     
@@ -52,8 +60,27 @@ productMinus.addEventListener('click', () => {
 
 productPictureSmall.forEach(item => {
     item.addEventListener('click', () => {
-      $.querySelector('.product-picture__small--active').classList.remove('product-picture__small--active')
-      item.classList.add('product-picture__small--active');
-      productPictureMain.src = item.src
+      smallGallery("product-picture__small--active",productPictureMain,item)
+    //   $.querySelector('.product-picture__small--active').classList.remove('product-picture__small--active')
+    //   item.classList.add('product-picture__small--active');
+    //   productPictureMain.src = item.src
     })
 })
+
+
+productPictureMain.addEventListener('click', () =>{
+    activeImages.style.display = 'flex';
+})
+
+activeImagesClose.addEventListener('click', ( )=>{
+    activeImages.style.display = 'none';
+})
+
+
+// productPictureSmall.forEach(item => {
+//     item.addEventListener('click', () => {
+//       $.querySelector('.product-picture__small--active').classList.remove('product-picture__small--active')
+//       item.classList.add('product-picture__small--active');
+//       productPictureMain.src = item.src
+//     })
+// })
