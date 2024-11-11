@@ -313,9 +313,10 @@ body{
     align-items: center;
     padding: 16rem 6rem 0 6rem;
     margin-bottom: 10rem;
+    justify-content: center;
 }
 .product-pictures{
-    flex-basis: 50%;
+    flex-basis: 40%;
 }
 .product-picture__frame{
     max-width: 40rem;
@@ -358,7 +359,7 @@ body{
 }
 
 .product-text-wrapper{
-    flex-basis: 50%;
+    flex-basis: 60%;
 }
 .product-text{
 
