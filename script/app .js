@@ -15,6 +15,7 @@ const productWrapper = $.querySelector('.product-wrapper');
 const productTextWrapper = $.querySelector('.product-text-wrapper')
 
 
+
 let gallery = [
     "./Images/image-product-1.jpg",
     "./Images/image-product-2.jpg",
@@ -61,64 +62,62 @@ function activeImage(){
     })
 }
 
- function addDataToHtml(){
+
+function addDataToHtml(){
     if(listProduct.length > 0){
         listProduct.forEach(product => {
             let productPictures = $.querySelector('.product-pictures')
 
-            let productTextWrapper = $.querySelector('.product-text-wrapper')
+            let productPictureMain = $.querySelector('.product-picture__main')
 
+            let activeImageMain = $.querySelector('.active-images__main')
+            
+            let activeImagesWrapper = $.querySelector('.active-images__wrapper')
+
+            let mainThumbnailImg1 = $.getElementById('main-thumbnail-img1')
+            let mainThumbnailImg2 = $.getElementById('main-thumbnail-img2')
+            let mainThumbnailImg3 = $.getElementById('main-thumbnail-img3')
+            let mainThumbnailImg4 = $.getElementById('main-thumbnail-img4')
+
+            let activeThumbnailImg1 = $.getElementById('activeThumbnailImg1')
+            let activeThumbnailImg2 = $.getElementById('activeThumbnailImg2')
+            let activeThumbnailImg3 = $.getElementById('activeThumbnailImg3')
+            let activeThumbnailImg4 = $.getElementById('activeThumbnailImg4')
+            
+            productPictureMain.src = product.mainImg
+
+            activeImageMain.src = product.mainImg
+
+            activeThumbnailImg1.src = product.img1
+            activeThumbnailImg2.src = product.img2
+            activeThumbnailImg3.src = product.img3
+            activeThumbnailImg4.src = product.img4
+
+            mainThumbnailImg1.src = product.img1
+            mainThumbnailImg2.src = product.img2
+            mainThumbnailImg3.src = product.img3
+            mainThumbnailImg4.src = product.img4
 
             productWrapper.dataset.id = product.id;
 
-            // console.log(product.id)
-
-            productPictures.insertAdjacentHTML('afterbegin', 
-                `
-             <div class="product-picture__frame">
-                        <img class="product-picture__main" src="${product.mainImg}" alt="Product-img">
-                    </div>
-                    <div class="product-pictures__wrapper">
-                        <div class="product-pictures__small-frame">
-                            <img class="product-picture__small
-                            product-picture__small--active" src="${product.img1}" alt="Product-img">
-                        </div>
-                        <div class="product-pictures__small-frame">
-                            <img class="product-picture__small" src="${product.img2}" alt="Product-img">
-                        </div>
-                        <div class="product-pictures__small-frame">
-                            <img class="product-picture__small" src="${product.img3}" alt="Product-img">
-                        </div>
-                        <div class="product-pictures__small-frame">
-                            <img class="product-picture__small" src="${product.img4}" alt="Product-img">
-                        </div>
-                    </div>
-            `
-            ) 
-
-            productTextWrapper.insertAdjacentHTML('afterbegin' ,
-                `
+            productTextWrapper.insertAdjacentHTML('afterbegin' ,`
                        <div class="product-text">
                         <h4 class="product-company">${product.companyName}</h4>
                         <h1 class="product-name" alt="name">${product.name}</h1>
                         <p class="product-description">${product.description}</p>
                         <div class="product-sale">
-                            <h5 class="product-sale-price">${product.price}</h5>
+                            <h5 class="product-sale-price">$${product.price}</h5>
                             <h6 class="product-sale-percent">${product.percent}%</h6>
                         </div>
                         <span class="product-previous-price">$${product.previousPrice}</span>
                        </div>
                  `
             ) 
-
-            // console.log(productPictures)
-        
-        
-
-            
         })
  }
 }
+
+
 
 
 
@@ -197,6 +196,7 @@ nextBtn.addEventListener('click',() =>{
 
     activeImage()
 })
+
 
 previousBtn.addEventListener('click', () =>{
     galleryIndex --
