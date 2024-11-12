@@ -13,6 +13,7 @@ const previousBtn = $.querySelector('.active-images__previous--svg')
 const nextBtn = $.querySelector('.active-images__next--svg')
 const productWrapper = $.querySelector('.product-wrapper');
 const productTextWrapper = $.querySelector('.product-text-wrapper')
+const productBtnAdd = $.querySelector('.product-btn__add')
 
 
 
@@ -99,6 +100,8 @@ function addDataToHtml(){
             mainThumbnailImg4.src = product.img4
 
             productWrapper.dataset.id = product.id;
+            productBtnAdd.dataset.id = product.id;
+
 
             productTextWrapper.insertAdjacentHTML('afterbegin' ,`
                        <div class="product-text">
@@ -117,6 +120,9 @@ function addDataToHtml(){
  }
 }
 
+function addToCart(productId){
+    
+}
 
 
 
@@ -125,6 +131,14 @@ function addDataToHtml(){
 
 
 // *** Events ***
+
+productWrapper.addEventListener('click', (event) => {
+    let positionClick = event.target;
+    if(positionClick.classList.contains('add-to-cart')){
+        let productId = productBtnAdd.dataset.id;
+        addToCart(productId)
+    }
+})
 
 productPlus.addEventListener('click', () => {
     
