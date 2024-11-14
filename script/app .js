@@ -7,6 +7,7 @@ const productPlus = $.querySelector('.product-plus')
 const productNumber = $.querySelector('.product-number')
 const productNumberMax = $.querySelector('.product-number--max')
 const productPictureSmall = $.querySelectorAll('.product-picture__small')
+const productPictureFrame = $.querySelector('.product-picture__frame')
 const productPictureMain = $.querySelector('.product-picture__main')
 const activeImages = $.querySelector('.active-images')
 const activeImagesClose = $.querySelector('.active-images--close')
@@ -306,7 +307,7 @@ productPictureSmall.forEach(item => {
     })
 })
 
-productPictureMain.addEventListener('click', () =>{
+productPictureFrame.addEventListener('click', () =>{
     activeImages.style.display = 'flex';
 })
 
