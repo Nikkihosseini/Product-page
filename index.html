@@ -42,6 +42,9 @@
     <header class="header">
      <div class="header-wrapper">
         <div class="content-left">
+            <svg class="open-menu--svg">
+             <use href="#menu"></use>
+            </svg>
             <svg class="header-logo">
              <use href="#logo"></use>
             </svg>
@@ -62,6 +65,27 @@
                  <a class="menu-item__link" href="#">Contact</a>
                 </li>
             </ul>
+               <!-- Mobile  Menu -->
+            <ul class="mobile-menu">
+                <svg class="close-mobile-menu">
+                    <use href="#close"></use>
+                </svg>
+                <li class="mobile-menu-item">
+                 <a class="mobile-menu-item__link" href="#">Collections</a>
+                </li>
+                <li class="mobile-menu-item">
+                 <a class="mobile-menu-item__link" href="#">Men</a>
+                </li>
+                <li class="mobile-menu-item">
+                 <a class="mobile-menu-item__link" href="#">Women</a>
+                </li>
+                <li class="mobile-menu-item">
+                 <a class="mobile-menu-item__link" href="#">About</a>
+                </li>
+                <li class="mobile-menu-item">
+                 <a class="mobile-menu-item__link" href="#">Contact</a>
+                </li>
+            </ul>
        </div>
        <div class="content-right">
             <div class="header-cart">
@@ -70,27 +94,30 @@
                     <use href="#cart"></use>
                 </svg>
                 <span class="header-cart__number">3</span>
+                <div class="cart-box">
+                    <h3 class="cart-box__title">Cart</h3>
+                    <div class="empty-cart-box">
+                      Your cart is empty!
+                    </div>
+                    <div class="cart-box__product--wrapper"></div>
+                      <!-- <div class="cart-box__product">
+                          <img class="product-box__img" src="./Images/image-product-1-thumbnail.jpg" alt="Product">
+                          <div class="product-box__content">
+                             <div class="product-box__wrapper">
+                              <p class="product-box__name">Fall Limited Edition Sneakers</p>
+                              <div class="product-box__prices">
+                                  <span class="product-price">$125.00 × 3</span>
+                                  <span class="product-Total-price">$350.00</span>
+                              </div>
+                             </div>
+                             <svg class="product-box__delete">
+                              <use href="#delete"></use>
+                          </svg>
+                          </div>
+                      </div> -->
+                    <a class="cart-box__link" href="#">Checkout</a>
+               </div>
             </div>
-             <div class="cart-box">
-                  <h3 class="cart-box__title">Cart</h3>
-                  <div class="cart-box__product">
-                     <img class="product-box__img" src="./Images/image-product-1-thumbnail.jpg" alt="Product">
-                     <div class="product-box__content">
-                        <div class="product-box__wrapper">
-                         <p class="product-box__name">Fall Limited Edition Sneakers</p>
-                         <div class="product-box__prices">
-                             <span class="product-price">$125.00 × 3</span>
-                             <span class="product-Total-price">$350.00</span>
-                         </div>
-                        </div>
-                        <svg class="product-box__delete">
-                         <use href="#delete"></use>
-                     </svg>
-                     </div>
-                  </div>
-                  
-                  <a class="cart-box__link" href="#">Checkout</a>
-             </div>
             </div>
             <a class="header-user" href="#">
                <img class="header-user__img" src="./Images/image-avatar.png" alt="user">
@@ -98,6 +125,7 @@
        </div>
      </div>
     </header>
+  
      <!-- Main -->
       <section class="product">
         <div class="container">
