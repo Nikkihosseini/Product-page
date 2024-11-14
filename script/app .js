@@ -1,4 +1,7 @@
 const $ = document
+const hamburgerMenu = $.querySelector('.open-menu--svg')
+const closeMobileMenu = $.querySelector('.close-mobile-menu')
+const mobileMenu = $.querySelector('.mobile-menu')
 const productMinus = $.querySelector('.product-minus')
 const productPlus = $.querySelector('.product-plus')
 const productNumber = $.querySelector('.product-number')
@@ -14,6 +17,14 @@ const nextBtn = $.querySelector('.active-images__next--svg')
 const productWrapper = $.querySelector('.product-wrapper');
 const productTextWrapper = $.querySelector('.product-text-wrapper')
 const productBtnAdd = $.querySelector('.product-btn__add')
+const productBtnNumber = $.querySelector('.product-btn__number')
+const cartQuantity = $.querySelector('.header-cart__number')
+const cartBoxProduct = $.querySelector('.cart-box__product')
+const emptyCartBox = $.querySelector('.empty-cart-box')
+const cartBoxLink = $.querySelector('.cart-box__link')
+const cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
+
+
 
 
 
@@ -26,7 +37,7 @@ let gallery = [
 let galleryIndex = 0
 let productCount = 1
 let listProduct = []
-
+let carts = []
 
 
 // *** Get Product Data ***
@@ -45,7 +56,21 @@ inItApp();
 
 
 // *** Functions ***
+function mobileMenuHandler(style1 , style2){
+    hamburgerMenu.style.display = style1
+    mobileMenu.style.left = style2
+}
 
+// function emptyCart(){
+//     if(cartBoxProductWrapper.innerHTML == ''){
+//         emptyCartBox.style.display = 'flex';
+//         cartBoxLink.style.display = 'none';
+//       }else{
+//         emptyCartBox.style.display = 'none';
+//         cartBoxLink.style.display = 'flex';
+//       }
+// }
+// emptyCart()
 
 function smallGallery(className,productPucture,item){
     $.querySelector(`.${className}`).classList.remove(className)
@@ -63,17 +88,50 @@ function activeImage(){
     })
 }
 
+// function deleteAddToCart(){
+//     productBtnAdd.addEventListener('click', () => {
+//         productBtnAdd.style.display = 'none';
+//         productBtnNumber.style.display = 'flex';
+//     })
+// }
+// deleteAddToCart()
+
+function deleteProductFromCart(event){
+     let productId = event.target.parentElement.dataset.id
+
+     let ProductIndex = listProduct.findIndex((value) => value.id == productId);
+
+     let cartBoxProduct = $.querySelector('.cart-box__product--wrapper  div')
+
+ 
+
+     console.log(cartBoxProduct.dataset.id == productId)
+ 
+     if (cartBoxProduct.dataset.id == productId){
+        cartBoxProduct.remove()
+      }
+
+      if(ProductIndex > -1){
+        listProduct.splice(ProductIndex, 1);
+        productBtnAdd.style.display = 'flex';
+        productBtnNumber.style.display = 'none';
+      }
+     
+      emptyCart()
+
+
+      console.log(cartBoxProduct)
+
+}
+
 
 function addDataToHtml(){
     if(listProduct.length > 0){
         listProduct.forEach(product => {
-            let productPictures = $.querySelector('.product-pictures')
 
             let productPictureMain = $.querySelector('.product-picture__main')
 
             let activeImageMain = $.querySelector('.active-images__main')
-            
-            let activeImagesWrapper = $.querySelector('.active-images__wrapper')
 
             let mainThumbnailImg1 = $.getElementById('main-thumbnail-img1')
             let mainThumbnailImg2 = $.getElementById('main-thumbnail-img2')
@@ -121,16 +179,79 @@ function addDataToHtml(){
 }
 
 function addToCart(productId){
+    let positionThisProductInCart = carts.findIndex((value) => value.productId == carts.productId)
+
+    console.timeLog(positionThisProductInCart)
     
+    if(carts.length <= 0){
+        carts=[{
+            productId : productId,
+            quantity : 1
+        }]
+    }else if(positionThisProductInCart < 0){
+        carts.push({
+            productId : productId,
+            quantity : 1
+        })
+    }else{
+        carts[positionThisProductInCart].quantity =   carts[positionThisProductInCart].quantity + 1
+    }
+   addCartToHtml()
+}
+
+
+function addCartToHtml(){
+    if(carts.length > 0){
+        carts.forEach(cart => {
+            let cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
+
+            let cartBoxProduct = $.createElement('div')
+            cartBoxProduct.classList.add('cart-box__product')
+            
+
+            let positionProduct = listProduct.findIndex((value) => value.id == cart.productId);
+            let info = listProduct[positionProduct]
+            
+           
+
+
+            cartBoxProduct.dataset.id = info.id
+            cartBoxProduct.innerHTML= `
+                <img class="product-box__img" src="${info.img1}" alt="Product">
+                        <div class="product-box__content">
+                           <div class="product-box__wrapper">
+                            <p class="product-box__name">${info.name}</p>
+                            <div class="product-box__prices">
+                                <span class="product-price">$${info.price} × ${productNumber.innerHTML}</span>
+                                <span class="product-Total-price">$${(info.price * productNumber.innerHTML).toFixed(2)}</span>
+                            </div>
+                           </div>
+                           <svg onclick="deleteProductFromCart(event)" class="product-box__delete" data-id ="${info.id}">
+                            <use href="#delete"></use>
+                        </svg>
+                </div>
+            `
+
+            cartBoxProductWrapper.append(cartBoxProduct)
+
+        })
+    }
 }
 
 
 
-
-
-
-
 // *** Events ***
+
+hamburgerMenu.addEventListener("click" , () => {
+   mobileMenuHandler("none" , "0")
+
+})
+
+closeMobileMenu.addEventListener("click" , () => {
+  mobileMenuHandler("block" , "-18rem")
+})
+
+
 
 productWrapper.addEventListener('click', (event) => {
     let positionClick = event.target;
@@ -159,6 +280,7 @@ productPlus.addEventListener('click', () => {
     }
 
     productNumber.innerHTML = productCount
+
       
       
 })
