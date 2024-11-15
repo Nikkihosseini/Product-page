@@ -24,6 +24,10 @@ const cartBoxProduct = $.querySelector('.cart-box__product')
 const emptyCartBox = $.querySelector('.empty-cart-box')
 const cartBoxLink = $.querySelector('.cart-box__link')
 const cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
+const previousBtnMobile = $.querySelector('.product-picture__previous')
+const nextBtnMobile = $.querySelector('.product-picture__next')
+const productPictureMobileImg = $.querySelector('.product-picture-mobile__img')
+
 
 
 
@@ -61,6 +65,31 @@ function mobileMenuHandler(style1 , style2){
     hamburgerMenu.style.display = style1
     mobileMenu.style.left = style2
 }
+
+function nextimg(mainImage){
+    galleryIndex ++
+    if(galleryIndex >= gallery.length){
+        galleryIndex = 0
+    }
+    mainImage.setAttribute('src' , gallery[galleryIndex])
+}
+
+function previousImg(mainImage){
+    galleryIndex --
+    if(galleryIndex < 0){
+        galleryIndex = gallery.length - 1 
+    }
+
+    mainImage.setAttribute('src' , gallery[galleryIndex])
+}
+
+function activeImagesDisplay(){
+    let screenWidthCheck = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    if(screenWidthCheck < 576){
+        activeImages.style.display = "none";
+    }
+}
+activeImagesDisplay()
 
 // function emptyCart(){
 //     if(cartBoxProductWrapper.innerHTML == ''){
@@ -325,26 +354,28 @@ activeImagesSmall.forEach(item => {
 
 
 nextBtn.addEventListener('click',() =>{
-    galleryIndex ++
-    if(galleryIndex >= gallery.length){
-        galleryIndex = 0
-    }
-    activeImagesMain.setAttribute('src' , gallery[galleryIndex])
+    nextimg(activeImagesMain)
 
     activeImage()
 })
 
 
 previousBtn.addEventListener('click', () =>{
-    galleryIndex --
-    if(galleryIndex < 0){
-        galleryIndex = gallery.length - 1 
-    }
-
-    activeImagesMain.setAttribute('src' , gallery[galleryIndex])
+    previousImg(activeImagesMain)
 
     activeImage()
 })
 
+nextBtnMobile.addEventListener('click',() =>{
+    nextimg(productPictureMobileImg)
+})
 
 
+previousBtnMobile.addEventListener('click', () =>{
+    previousImg(productPictureMobileImg)
+})
+
+
+console.log( document.body.clientWidth)
+
+screenWidthCheck = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
