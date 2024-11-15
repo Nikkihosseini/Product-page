@@ -60,6 +60,7 @@
     .product-text-wrapper{
         margin-left: 3rem;
     }
+   
 }
 
 
@@ -102,6 +103,7 @@
     }
     .product-text-wrapper{
         margin-top: 0;
+        margin-bottom: 0;
     }
    
    
@@ -137,7 +139,11 @@
         justify-content: space-between;
         gap: 5rem;
      }  
-
+    
+     .active-images__main-wrapper{
+        max-width: 55rem;
+        max-height: 55rem;
+    }
 
    
    
