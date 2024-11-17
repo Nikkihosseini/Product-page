@@ -21,12 +21,12 @@ const productBtnAdd = $.querySelector('.product-btn__add')
 const productBtnNumber = $.querySelector('.product-btn__number')
 const cartQuantity = $.querySelector('.header-cart__number')
 const cartBoxProduct = $.querySelector('.cart-box__product')
-const emptyCartBox = $.querySelector('.empty-cart-box')
 const cartBoxLink = $.querySelector('.cart-box__link')
 const cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
 const previousBtnMobile = $.querySelector('.product-picture__previous')
 const nextBtnMobile = $.querySelector('.product-picture__next')
 const productPictureMobileImg = $.querySelector('.product-picture-mobile__img')
+const empty = $.querySelector('.empty-cart-box')
 
 
 
@@ -39,13 +39,16 @@ let gallery = [
     "./Images/image-product-3.jpg",
     "./Images/image-product-4.jpg"
 ]
+
 let galleryIndex = 0
 let productCount = 1
 let listProduct = []
-let carts = []
+let cart = []
+let totalCartQty = 0;
 
 
-console.log(carts)
+
+// console.log(cart)
 
 // *** Get Product Data ***
 function inItApp(){
@@ -63,6 +66,58 @@ inItApp();
 
 
 // *** Functions ***
+
+function emptyCartBox(){
+    let cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
+
+    if(cartBoxProductWrapper.children.length === 0){
+        empty.style.display = 'flex'
+        cartBoxLink.style.display = 'none'
+    }else if(cartBoxProductWrapper.children.length > 0){
+        empty.style.display = 'none'
+        cartBoxLink.style.display = 'flex'
+    }
+}
+emptyCartBox()
+
+function updateTotalCartQty(){
+    let cartBoxProduct = document.querySelectorAll(".cart-box__product");
+    totalCartQty = 0;
+    cartBoxProduct.forEach((item) => {
+      totalCartQty += parseInt(item.dataset.quantity);
+      console.log(item.dataset.quantity)
+    });
+    cartQuantity.innerHTML = totalCartQty
+}
+
+function removeProductFromCart(event){
+    let productId = event.target.parentElement.dataset.id
+
+    let positionThisProductInCart = cart.findIndex((value) => value.productId == productId)
+
+    
+
+    let cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
+
+    let cartBoxProduct = $.querySelector('.cart-box__product')
+
+
+    cart.splice(positionThisProductInCart, 1)
+     
+    cartBoxProductWrapper.removeChild(cartBoxProduct)
+
+    if(cart.length === 0){
+        emptyCartBox()
+    }
+
+    if(productBtnAdd.dataset.id == productId){
+         productBtnAdd.style.display = 'flex'
+    }
+
+    updateTotalCartQty()
+    
+}
+
 function mobileMenuHandler(style1 , style2){
     hamburgerMenu.style.display = style1
     mobileMenu.style.left = style2
@@ -114,45 +169,6 @@ function activeImage(){
         }
     })
 }
-
-function emptyCart(){
-    if(cartBoxProductWrapper.innerHTML == ''){
-        emptyCartBox.style.display = 'flex';
-        cartBoxLink.style.display = 'none';
-      }else{
-        emptyCartBox.style.display = 'none';
-        cartBoxLink.style.display = 'flex';
-      }
-}
-emptyCart()
-
-// function deleteProductFromCart(event){
-//      let productId = event.target.parentElement.dataset.id
-
-//      let ProductIndex = listProduct.findIndex((value) => value.id == productId);
-
-//      let cartBoxProduct = $.querySelector('.cart-box__product--wrapper  div')
-
- 
-
-//      console.log(cartBoxProduct.dataset.id == productId)
- 
-//      if (cartBoxProduct.dataset.id == productId){
-//         cartBoxProduct.remove()
-//       }
-
-//       if(ProductIndex > -1){
-//         listProduct.splice(ProductIndex, 1);
-//         productBtnAdd.style.display = 'flex';
-//         productBtnNumber.style.display = 'none';
-//       }
-     
-//       emptyCart()
-
-
-//       console.log(cartBoxProduct)
-
-// }
 
 
 function addDataToHtml(){
@@ -209,42 +225,52 @@ function addDataToHtml(){
 }
 
 function addToCart(productId){
-    let positionThisProductInCart = carts.findIndex((value) => value.productId == carts.productId)
+    let positionThisProductInCart = cart.findIndex((value) => value.productId == productId)
 
-    console.log(positionThisProductInCart)
-    
-    if(carts.length <= 0){
-        carts=[{
+    let mainProduct = listProduct.find((product) => {
+        return product.id == productId 
+    })
+     
+    if(cart.length <= 0){
+        cart=[{
             productId : productId,
-            quantity : 1
+            name : mainProduct.name,
+            quantity : 1,
         }]
     }else if(positionThisProductInCart < 0){
-        carts.push({
+        cart.push({
             productId : productId,
-            quantity : 1
+            name : mainProduct.name,
+            quantity : 1,
         })
     }else{
-        carts[positionThisProductInCart].quantity =   carts[positionThisProductInCart].quantity + 1
+        cart[positionThisProductInCart].quantity =   cart[positionThisProductInCart].quantity + 1
     }
-   addCartToHtml()
+    
+
+    
+   
+
+
+   addCartToHtml(productId)
 }
 
 
-function addCartToHtml(){
-    if(carts.length > 0){
-        carts.forEach(cart => {
+function addCartToHtml(productId){
+    if(cart.length > 0){
+        cart.forEach(cart => {
             let cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
-
+        
             let cartBoxProduct = $.createElement('div')
             cartBoxProduct.classList.add('cart-box__product')
-            
+             
 
             let positionProduct = listProduct.findIndex((value) => value.id == cart.productId);
             let info = listProduct[positionProduct]
-            
-           
 
+            console.log(cart.productId)
 
+            cartBoxProduct.dataset.quantity = productCount;
             cartBoxProduct.dataset.id = info.id
             cartBoxProduct.innerHTML= `
                 <img class="product-box__img" src="${info.img1}" alt="Product">
@@ -252,17 +278,24 @@ function addCartToHtml(){
                            <div class="product-box__wrapper">
                             <p class="product-box__name">${info.name}</p>
                             <div class="product-box__prices">
-                                <span class="product-price">$${info.price} × ${productNumber.innerHTML}</span>
-                                <span class="product-Total-price">$${(info.price * productNumber.innerHTML).toFixed(2)}</span>
+                                <span class="product-price">$${info.price} × ${productCount}</span>
+                                <span class="product-Total-price">$${(info.price * productCount).toFixed(2)}</span>
                             </div>
                            </div>
-                           <svg onclick="deleteProductFromCart(event)" class="product-box__delete" data-id ="${info.id}">
+                           <svg onclick="removeProductFromCart(event)" class="product-box__delete" data-id ="${info.id}">
                             <use href="#delete"></use>
                         </svg>
                 </div>
             `
 
             cartBoxProductWrapper.append(cartBoxProduct)
+
+            updateTotalCartQty()
+            
+            if(cartBoxProductWrapper.innerHTML != ''){
+                empty.style.display = 'none'
+                cartBoxLink.style.display = 'flex'
+            }
 
         })
     }
@@ -271,6 +304,15 @@ function addCartToHtml(){
 
 
 // *** Events ***
+
+productWrapper.addEventListener('click', (event) => {
+    let positionClick = event.target;
+    if(positionClick.classList.contains('add-to-cart')){
+        let productId = productBtnAdd.dataset.id;
+        productBtnAdd.style.display = 'none'
+        addToCart(productId)
+    }
+})
 
 hamburgerMenu.addEventListener("click" , () => {
    mobileMenuHandler("none" , "0")
@@ -281,15 +323,6 @@ closeMobileMenu.addEventListener("click" , () => {
   mobileMenuHandler("block" , "-18rem")
 })
 
-
-
-productWrapper.addEventListener('click', (event) => {
-    let positionClick = event.target;
-    if(positionClick.classList.contains('add-to-cart')){
-        let productId = productBtnAdd.dataset.id;
-        addToCart(productId)
-    }
-})
 
 productPlus.addEventListener('click', () => {
     
