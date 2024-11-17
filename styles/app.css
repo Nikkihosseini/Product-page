@@ -313,6 +313,10 @@ body{
     color: var(--dark-blue);
     font-weight: 700;
 }
+.product-box__delete--wrapper{
+    width: 3rem;
+    height: 3rem;
+}
 .product-box__delete{
     width: 2rem;
     height: 2rem;

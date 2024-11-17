@@ -91,11 +91,11 @@ function updateTotalCartQty(){
 }
 
 function removeProductFromCart(event){
+    productNumber.innerHTML = 1
     let productId = event.target.parentElement.dataset.id
 
     let positionThisProductInCart = cart.findIndex((value) => value.productId == productId)
 
-    
 
     let cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
 
@@ -113,7 +113,7 @@ function removeProductFromCart(event){
     if(productBtnAdd.dataset.id == productId){
          productBtnAdd.style.display = 'flex'
     }
-
+    
     updateTotalCartQty()
     
 }
@@ -243,14 +243,7 @@ function addToCart(productId){
             name : mainProduct.name,
             quantity : 1,
         })
-    }else{
-        cart[positionThisProductInCart].quantity =   cart[positionThisProductInCart].quantity + 1
     }
-    
-
-    
-   
-
 
    addCartToHtml(productId)
 }
@@ -282,9 +275,11 @@ function addCartToHtml(productId){
                                 <span class="product-Total-price">$${(info.price * productCount).toFixed(2)}</span>
                             </div>
                            </div>
+                        <div onclick="removeProductFromCart(event)" data-id ="${info.id}" class="product-box__delete--wrapper">
                            <svg onclick="removeProductFromCart(event)" class="product-box__delete" data-id ="${info.id}">
-                            <use href="#delete"></use>
+                            <use onclick="removeProductFromCart(event)" href="#delete"></use>
                         </svg>
+                        </div>
                 </div>
             `
 
@@ -343,9 +338,7 @@ productPlus.addEventListener('click', () => {
     }
 
     productNumber.innerHTML = productCount
-
-      
-      
+    updateTotalCartQty()
 })
 
 productMinus.addEventListener('click', () => {
