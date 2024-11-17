@@ -58,9 +58,6 @@
     .product-sale{
         justify-content: center;
     }
-    .product-text-wrapper{
-        margin-left: 3rem;
-    }
    
 }
 
@@ -111,6 +108,9 @@
         height: 6rem;
     }    
    
+    .product-text-wrapper{
+        margin-left: 3rem;
+    }
    
 }
 
@@ -182,6 +182,10 @@
     .product-name{
         margin-top: 0;
     }
+    .product-text-wrapper{
+        margin-left: 0;
+    }
+   
 }
 
 
