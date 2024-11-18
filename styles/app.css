@@ -539,13 +539,16 @@ body{
     color: var(--dark-grayish-blue);
     font-weight: 700;
     font-size: 1.8rem;
+    display: inline-block;
     position: relative;
 }
-.product-previous-price::after{
+.product-previous-price::before{
+    content: '';
     position: absolute;
     background-color: var(--dark-grayish-blue);
+    display: inline-block;
     width: 100%;
-    height: 0.2rem;
+    height: 0.15rem;
     top: 0;
     bottom: 0;
     margin: auto;
