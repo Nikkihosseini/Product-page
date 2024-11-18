@@ -47,6 +47,8 @@ let cart = []
 let totalCartQty = 0;
 
 
+console.log(totalCartQty)
+
 
 // console.log(cart)
 
@@ -66,6 +68,39 @@ inItApp();
 
 
 // *** Functions ***
+function plus(){
+    if(productCount == 1 ||  productCount > 1 || productCount < 10){
+        productCount++
+    }
+ 
+     if(productCount > 10  || productCount > 9){ 
+         productCount = 10
+     }
+ 
+     if(productCount == 10){
+         productNumberMax.style.display = "block";
+     }
+ 
+     if(productCount < 10){
+         productNumberMax.style.display = "none";
+     }
+ 
+     productNumber.innerHTML = productCount
+}
+
+function minus(){
+    if (productCount > 1) {
+        updateCount(productCount - 1);
+      }
+      if(productCount < 10){
+          productNumberMax.style.display = "none";
+      }
+}
+
+function updateCount(newCount){
+    productCount = newCount;
+    productNumber.innerHTML = productCount
+}
 
 function emptyCartBox(){
     let cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
@@ -93,18 +128,13 @@ function updateTotalCartQty(){
 function removeProductFromCart(event){
     productNumber.innerHTML = 1
     let productId = event.target.parentElement.dataset.id
+    const cartItem = event.target.closest(".cart-box__product");
 
     let positionThisProductInCart = cart.findIndex((value) => value.productId == productId)
 
-
-    let cartBoxProductWrapper = $.querySelector('.cart-box__product--wrapper')
-
-    let cartBoxProduct = $.querySelector('.cart-box__product')
-
-
     cart.splice(positionThisProductInCart, 1)
-     
-    cartBoxProductWrapper.removeChild(cartBoxProduct)
+
+    cartItem.remove()
 
     if(cart.length === 0){
         emptyCartBox()
@@ -115,6 +145,7 @@ function removeProductFromCart(event){
     }
     
     updateTotalCartQty()
+    updateCount(1);
     
 }
 
@@ -226,7 +257,7 @@ function addDataToHtml(){
 
 function addToCart(productId){
     let positionThisProductInCart = cart.findIndex((value) => value.productId == productId)
-
+listProduct
     let mainProduct = listProduct.find((product) => {
         return product.id == productId 
     })
@@ -243,6 +274,8 @@ function addToCart(productId){
             name : mainProduct.name,
             quantity : 1,
         })
+    }else{
+        cartBoxProduct.dataset.quantity ++
     }
 
    addCartToHtml(productId)
@@ -260,8 +293,6 @@ function addCartToHtml(productId){
 
             let positionProduct = listProduct.findIndex((value) => value.id == cart.productId);
             let info = listProduct[positionProduct]
-
-            console.log(cart.productId)
 
             cartBoxProduct.dataset.quantity = productCount;
             cartBoxProduct.dataset.id = info.id
@@ -286,6 +317,7 @@ function addCartToHtml(productId){
             cartBoxProductWrapper.append(cartBoxProduct)
 
             updateTotalCartQty()
+           
             
             if(cartBoxProductWrapper.innerHTML != ''){
                 empty.style.display = 'none'
@@ -318,43 +350,11 @@ closeMobileMenu.addEventListener("click" , () => {
   mobileMenuHandler("block" , "-18rem")
 })
 
+productPlus.addEventListener('click', plus)
 
-productPlus.addEventListener('click', () => {
-    
-   if(productCount == 1 ||  productCount > 1 || productCount < 10){
-       productCount++
-   }
-
-    if(productCount > 10  || productCount > 9){ 
-        productCount = 10
-    }
-
-    if(productCount == 10){
-        productNumberMax.style.display = "block";
-    }
-
-    if(productCount < 10){
-        productNumberMax.style.display = "none";
-    }
-
-    productNumber.innerHTML = productCount
-    updateTotalCartQty()
-})
-
-productMinus.addEventListener('click', () => {
-
-    if(productCount > 1){
-        productCount--
-    }
-
-    if(productCount < 10){
-        productNumberMax.style.display = "none";
-    }
-
-    productNumber.innerHTML = productCount
-
-})
-
+  
+productMinus.addEventListener("click", minus)
+ 
 
 productPictureSmall.forEach(item => {
     item.addEventListener('click', () => {
